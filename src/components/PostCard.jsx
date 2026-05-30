@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import "../App.css";
 
 function PostCard({ post }) {
@@ -27,7 +28,9 @@ function PostCard({ post }) {
         }}
       />
 
-      <button>Read More</button>
+      <Link to={`/post/${post.id}`}>
+        <button>Read More</button>
+      </Link>
     </div>
   );
 }

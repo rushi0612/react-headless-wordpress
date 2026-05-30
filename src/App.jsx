@@ -1,33 +1,27 @@
-import { useEffect, useState } from "react";
-import PostCard from "./components/PostCard";
-import api from "./services/api";
-import "./App.css";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+} from "react-router-dom";
+
+import Home from "./pages/Home";
+import SinglePost from "./pages/SinglePost";
 
 function App() {
-  const [posts, setPosts] = useState([]);
-
-  useEffect(() => {
-    api.get("/posts?_embed")
-      .then((res) => {
-        console.log(res.data);
-        setPosts(res.data);
-      })
-      .catch((err) => {
-        console.error("Error fetching posts:", err);
-      });
-  }, []);
-
   return (
-    <div className="container">
-      <h1>WordPress Blog</h1>
-
-      {posts.map((post) => (
-        <PostCard
-          key={post.id}
-          post={post}
+    <BrowserRouter>
+      <Routes>
+        <Route
+          path="/"
+          element={<Home />}
         />
-      ))}
-    </div>
+
+        <Route
+          path="/post/:id"
+          element={<SinglePost />}
+        />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
