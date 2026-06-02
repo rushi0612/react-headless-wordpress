@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 import PostCard from "../components/PostCard";
 import CategoryFilter from "../components/CategoryFilter";
+import SearchBar from "../components/SearchBar";
 import api from "../services/api";
 
 function Home() {
   const [posts, setPosts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
 
   // Fetch Categories
   useEffect(() => {
@@ -36,6 +38,8 @@ function Home() {
       });
   }, [selectedCategory]);
 
+  
+
   return (
     <div className="container">
       <h1>WordPress Blog</h1>
@@ -44,6 +48,11 @@ function Home() {
         categories={categories}
         selectedCategory={selectedCategory}
         onSelectCategory={setSelectedCategory}
+      />
+
+    <SearchBar
+        searchTerm={searchTerm}
+        setSearchTerm={setSearchTerm}
       />
 
       {posts.length > 0 ? (
